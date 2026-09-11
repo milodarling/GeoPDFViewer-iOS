@@ -89,7 +89,14 @@ Nothing in the parser, loader, or UI changes. Concrete next steps:
 2. Select the **GeoPDFViewer** scheme and an iOS Simulator, then Run (⌘R).
    - For a physical device, set your team under *Signing & Capabilities* and
      change `PRODUCT_BUNDLE_IDENTIFIER` (currently `com.example.GeoPDFViewer`).
-3. Tap **Open Sample Map**, or **Open ▸ Choose from Files…** for your own GeoPDF.
+3. Open a map three ways:
+   - Tap the bundled **Sample**.
+   - Tap **Open** (toolbar) to import a GeoPDF from Files — it's copied into the
+     app's folder and added to **My Files**.
+   - In the **Files app**, go to *On My iPhone ▸ GeoPDFViewer* and drop `.pdf`
+     files straight in; pull to refresh the list in the app. (Enabled by
+     `UIFileSharingEnabled` + `LSSupportsOpeningDocumentsInPlace` in Info.plist.)
+   Swipe to delete files under **My Files**.
 4. Simulate a position: **Features ▸ Location ▸ Custom…**, enter a point inside
    the sample's extent, e.g. **lat 32.91, lon −116.85** — the blue dot appears on
    the map. A point outside the extent hides the dot (as intended).

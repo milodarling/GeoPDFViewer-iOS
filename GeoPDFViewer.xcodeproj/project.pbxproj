@@ -10,6 +10,7 @@
 		000000000000000000008001 /* GeoPDFViewerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000007001 /* GeoPDFViewerApp.swift */; };
 		000000000000000000008002 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000007002 /* RootView.swift */; };
 		000000000000000000008003 /* DocumentPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000007003 /* DocumentPicker.swift */; };
+		000000000000000000008014 /* DocumentsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000007014 /* DocumentsStore.swift */; };
 		000000000000000000008004 /* GeoPDFMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000007004 /* GeoPDFMapViewController.swift */; };
 		000000000000000000008005 /* GeoPDFMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000007005 /* GeoPDFMapView.swift */; };
 		000000000000000000008006 /* MeasureGEO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000007006 /* MeasureGEO.swift */; };
@@ -26,6 +27,7 @@
 		000000000000000000007001 /* GeoPDFViewerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoPDFViewerApp.swift; sourceTree = "<group>"; };
 		000000000000000000007002 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		000000000000000000007003 /* DocumentPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPicker.swift; sourceTree = "<group>"; };
+		000000000000000000007014 /* DocumentsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsStore.swift; sourceTree = "<group>"; };
 		000000000000000000007004 /* GeoPDFMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoPDFMapViewController.swift; sourceTree = "<group>"; };
 		000000000000000000007005 /* GeoPDFMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoPDFMapView.swift; sourceTree = "<group>"; };
 		000000000000000000007006 /* MeasureGEO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureGEO.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 				000000000000000000007001 /* GeoPDFViewerApp.swift */,
 				000000000000000000007002 /* RootView.swift */,
 				000000000000000000007003 /* DocumentPicker.swift */,
+				000000000000000000007014 /* DocumentsStore.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -189,6 +192,7 @@
 				000000000000000000008001 /* GeoPDFViewerApp.swift in Sources */,
 				000000000000000000008002 /* RootView.swift in Sources */,
 				000000000000000000008003 /* DocumentPicker.swift in Sources */,
+				000000000000000000008014 /* DocumentsStore.swift in Sources */,
 				000000000000000000008004 /* GeoPDFMapViewController.swift in Sources */,
 				000000000000000000008005 /* GeoPDFMapView.swift in Sources */,
 				000000000000000000008006 /* MeasureGEO.swift in Sources */,
