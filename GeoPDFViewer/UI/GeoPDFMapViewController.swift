@@ -111,7 +111,7 @@ public final class GeoPDFMapViewController: UIViewController {
 
     private func updateTrack(geo: Georeferencer, page: PDFPage) {
         let points = recorder?.points ?? []
-        let origin = pdfView.convert(.zero, from: page)
+        let origin = pdfView.convert(CGPoint.zero, from: page)
         let signature = TrackSignature(count: points.count, originX: origin.x,
                                        originY: origin.y, scale: pdfView.scaleFactor)
         guard signature != lastSignature else { return }
