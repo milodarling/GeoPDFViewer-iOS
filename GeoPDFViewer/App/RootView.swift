@@ -5,6 +5,9 @@ import SwiftUI
 struct RootView: View {
     @State private var documents: [URL] = []
     @State private var isPickerPresented = false
+    @State private var isScannerPresented = false
+    @State private var isDownloading = false
+    @State private var errorMessage: String?
 
     var body: some View {
         NavigationStack {
@@ -33,7 +36,12 @@ struct RootView: View {
                 MapScreen(url: url)
             }
             .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
+                ToolbarItemGroup(placement: .topBarTrailing) {
+                    Button {
+                        isScannerPresented = true
+                    } label: {
+                        Label("Scan QR", systemImage: "qrcode.viewfinder")
+                    }
                     Button {
                         isPickerPresented = true
                     } label: {
@@ -46,8 +54,48 @@ struct RootView: View {
                     importPicked(pickedURL)
                 }
             }
+            .sheet(isPresented: $isScannerPresented) {
+                scannerSheet
+            }
             .refreshable { reload() }
             .onAppear { reload() }
+            .overlay { downloadOverlay }
+            .alert("Import Failed",
+                   isPresented: Binding(get: { errorMessage != nil },
+                                        set: { if !$0 { errorMessage = nil } })) {
+                Button("OK", role: .cancel) { errorMessage = nil }
+            } message: {
+                Text(errorMessage ?? "")
+            }
+        }
+    }
+
+    private var scannerSheet: some View {
+        NavigationStack {
+            QRScannerView { result in
+                isScannerPresented = false
+                handleScan(result)
+            }
+            .ignoresSafeArea()
+            .navigationTitle("Scan a PDF QR Code")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") { isScannerPresented = false }
+                }
+            }
+        }
+    }
+
+    @ViewBuilder
+    private var downloadOverlay: some View {
+        if isDownloading {
+            ZStack {
+                Color.black.opacity(0.3).ignoresSafeArea()
+                ProgressView("Downloading…")
+                    .padding(20)
+                    .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 12))
+            }
         }
     }
 
@@ -68,6 +116,33 @@ struct RootView: View {
         // persists and shows up in the list (and in the Files app).
         try? DocumentsStore.importFile(from: url)
         reload()
+    }
+
+    private func handleScan(_ result: Result<String, Error>) {
+        switch result {
+        case .failure(let error):
+            errorMessage = error.localizedDescription
+        case .success(let scanned):
+            do {
+                let url = try PDFDownloader.url(from: scanned)
+                downloadAndImport(url)
+            } catch {
+                errorMessage = error.localizedDescription
+            }
+        }
+    }
+
+    private func downloadAndImport(_ url: URL) {
+        isDownloading = true
+        Task { @MainActor in
+            defer { isDownloading = false }
+            do {
+                _ = try await PDFDownloader.downloadAndImport(from: url)
+                reload()
+            } catch {
+                errorMessage = error.localizedDescription
+            }
+        }
     }
 
     private func deleteItems(at offsets: IndexSet) {

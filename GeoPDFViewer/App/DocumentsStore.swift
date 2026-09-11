@@ -21,11 +21,17 @@ enum DocumentsStore {
             .sorted { $0.lastPathComponent.localizedCaseInsensitiveCompare($1.lastPathComponent) == .orderedAscending }
     }
 
-    /// Copy a file into Documents, returning its new URL. If a file with the
-    /// same name exists, a numeric suffix is added ("Map 2.pdf").
+    /// Copy a file into Documents, returning its new URL. Pass `preferredName`
+    /// to name the imported file (e.g. for downloads whose temp file has no
+    /// meaningful name). If a file with that name exists, a numeric suffix is
+    /// added ("Map 2.pdf").
     @discardableResult
-    static func importFile(from source: URL) throws -> URL {
-        let destination = uniqueDestination(for: source.lastPathComponent)
+    static func importFile(from source: URL, preferredName: String? = nil) throws -> URL {
+        // Strip any path components a caller-supplied name might contain.
+        let rawName = (preferredName ?? source.lastPathComponent) as NSString
+        var filename = rawName.lastPathComponent
+        if filename.isEmpty { filename = source.lastPathComponent }
+        let destination = uniqueDestination(for: filename)
         try FileManager.default.copyItem(at: source, to: destination)
         return destination
     }

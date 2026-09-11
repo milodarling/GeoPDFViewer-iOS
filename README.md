@@ -96,6 +96,11 @@ Nothing in the parser, loader, or UI changes. Concrete next steps:
    - In the **Files app**, go to *On My iPhone ▸ GeoPDFViewer* and drop `.pdf`
      files straight in; pull to refresh the list in the app. (Enabled by
      `UIFileSharingEnabled` + `LSSupportsOpeningDocumentsInPlace` in Info.plist.)
+   - Tap **Scan QR** (toolbar) and point the camera at a QR code containing an
+     `http(s)` link to a PDF — it's downloaded, verified to be a real PDF (by its
+     `%PDF-` header, not just the MIME type), and imported into **My Files**.
+     Requires a physical device (`NSCameraUsageDescription` in Info.plist); the
+     Simulator has no camera.
    Swipe to delete files under **My Files**.
 4. Simulate a position: **Features ▸ Location ▸ Custom…**, enter a point inside
    the sample's extent, e.g. **lat 32.91, lon −116.85** — the blue dot appears on
