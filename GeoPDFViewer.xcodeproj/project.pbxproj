@@ -1,0 +1,384 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		000000000000000000008001 /* GeoPDFViewerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000007001 /* GeoPDFViewerApp.swift */; };
+		000000000000000000008002 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000007002 /* RootView.swift */; };
+		000000000000000000008003 /* DocumentPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000007003 /* DocumentPicker.swift */; };
+		000000000000000000008004 /* GeoPDFMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000007004 /* GeoPDFMapViewController.swift */; };
+		000000000000000000008005 /* GeoPDFMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000007005 /* GeoPDFMapView.swift */; };
+		000000000000000000008006 /* MeasureGEO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000007006 /* MeasureGEO.swift */; };
+		000000000000000000008007 /* MathHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000007007 /* MathHelpers.swift */; };
+		000000000000000000008008 /* Georeferencer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000007008 /* Georeferencer.swift */; };
+		000000000000000000008009 /* SimpleAxisAlignedGeoreferencer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000007009 /* SimpleAxisAlignedGeoreferencer.swift */; };
+		000000000000000000008010 /* GeoPDFParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000007010 /* GeoPDFParser.swift */; };
+		000000000000000000008011 /* GeoPDFLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000007011 /* GeoPDFLoader.swift */; };
+		000000000000000000008013 /* El Cajon Mountain Trail Map.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 000000000000000000007013 /* El Cajon Mountain Trail Map.pdf */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		000000000000000000004001 /* GeoPDFViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeoPDFViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		000000000000000000007001 /* GeoPDFViewerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoPDFViewerApp.swift; sourceTree = "<group>"; };
+		000000000000000000007002 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		000000000000000000007003 /* DocumentPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPicker.swift; sourceTree = "<group>"; };
+		000000000000000000007004 /* GeoPDFMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoPDFMapViewController.swift; sourceTree = "<group>"; };
+		000000000000000000007005 /* GeoPDFMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoPDFMapView.swift; sourceTree = "<group>"; };
+		000000000000000000007006 /* MeasureGEO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureGEO.swift; sourceTree = "<group>"; };
+		000000000000000000007007 /* MathHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathHelpers.swift; sourceTree = "<group>"; };
+		000000000000000000007008 /* Georeferencer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Georeferencer.swift; sourceTree = "<group>"; };
+		000000000000000000007009 /* SimpleAxisAlignedGeoreferencer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleAxisAlignedGeoreferencer.swift; sourceTree = "<group>"; };
+		000000000000000000007010 /* GeoPDFParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoPDFParser.swift; sourceTree = "<group>"; };
+		000000000000000000007011 /* GeoPDFLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoPDFLoader.swift; sourceTree = "<group>"; };
+		000000000000000000007012 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		000000000000000000007013 /* El Cajon Mountain Trail Map.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "El Cajon Mountain Trail Map.pdf"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		000000000000000000005002 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		000000000000000000002001 = {
+			isa = PBXGroup;
+			children = (
+				000000000000000000002003 /* GeoPDFViewer */,
+				000000000000000000002002 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		000000000000000000002002 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				000000000000000000004001 /* GeoPDFViewer.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		000000000000000000002003 /* GeoPDFViewer */ = {
+			isa = PBXGroup;
+			children = (
+				000000000000000000002010 /* App */,
+				000000000000000000002011 /* UI */,
+				000000000000000000002012 /* GeoPDFKit */,
+				000000000000000000002013 /* Resources */,
+				000000000000000000007012 /* Info.plist */,
+			);
+			path = GeoPDFViewer;
+			sourceTree = "<group>";
+		};
+		000000000000000000002010 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				000000000000000000007001 /* GeoPDFViewerApp.swift */,
+				000000000000000000007002 /* RootView.swift */,
+				000000000000000000007003 /* DocumentPicker.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		000000000000000000002011 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				000000000000000000007004 /* GeoPDFMapViewController.swift */,
+				000000000000000000007005 /* GeoPDFMapView.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		000000000000000000002012 /* GeoPDFKit */ = {
+			isa = PBXGroup;
+			children = (
+				000000000000000000007006 /* MeasureGEO.swift */,
+				000000000000000000007007 /* MathHelpers.swift */,
+				000000000000000000007008 /* Georeferencer.swift */,
+				000000000000000000007009 /* SimpleAxisAlignedGeoreferencer.swift */,
+				000000000000000000007010 /* GeoPDFParser.swift */,
+				000000000000000000007011 /* GeoPDFLoader.swift */,
+			);
+			path = GeoPDFKit;
+			sourceTree = "<group>";
+		};
+		000000000000000000002013 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				000000000000000000007013 /* El Cajon Mountain Trail Map.pdf */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		000000000000000000003001 /* GeoPDFViewer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 000000000000000000006002 /* Build configuration list for PBXNativeTarget "GeoPDFViewer" */;
+			buildPhases = (
+				000000000000000000005001 /* Sources */,
+				000000000000000000005002 /* Frameworks */,
+				000000000000000000005003 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GeoPDFViewer;
+			productName = GeoPDFViewer;
+			productReference = 000000000000000000004001 /* GeoPDFViewer.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		000000000000000000001001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					000000000000000000003001 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = 000000000000000000006001 /* Build configuration list for PBXProject "GeoPDFViewer" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 000000000000000000002001;
+			productRefGroup = 000000000000000000002002 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				000000000000000000003001 /* GeoPDFViewer */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		000000000000000000005003 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				000000000000000000008013 /* El Cajon Mountain Trail Map.pdf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		000000000000000000005001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				000000000000000000008001 /* GeoPDFViewerApp.swift in Sources */,
+				000000000000000000008002 /* RootView.swift in Sources */,
+				000000000000000000008003 /* DocumentPicker.swift in Sources */,
+				000000000000000000008004 /* GeoPDFMapViewController.swift in Sources */,
+				000000000000000000008005 /* GeoPDFMapView.swift in Sources */,
+				000000000000000000008006 /* MeasureGEO.swift in Sources */,
+				000000000000000000008007 /* MathHelpers.swift in Sources */,
+				000000000000000000008008 /* Georeferencer.swift in Sources */,
+				000000000000000000008009 /* SimpleAxisAlignedGeoreferencer.swift in Sources */,
+				000000000000000000008010 /* GeoPDFParser.swift in Sources */,
+				000000000000000000008011 /* GeoPDFLoader.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		000000000000000000006101 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		000000000000000000006102 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		000000000000000000006103 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = GeoPDFViewer/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.GeoPDFViewer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		000000000000000000006104 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = GeoPDFViewer/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.GeoPDFViewer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		000000000000000000006001 /* Build configuration list for PBXProject "GeoPDFViewer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				000000000000000000006101 /* Debug */,
+				000000000000000000006102 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		000000000000000000006002 /* Build configuration list for PBXNativeTarget "GeoPDFViewer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				000000000000000000006103 /* Debug */,
+				000000000000000000006104 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 000000000000000000001001 /* Project object */;
+}
