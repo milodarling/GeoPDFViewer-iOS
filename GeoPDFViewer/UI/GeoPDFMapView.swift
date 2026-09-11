@@ -1,22 +1,17 @@
 import SwiftUI
 
-/// SwiftUI wrapper around `GeoPDFMapViewController`.
-///
-///     GeoPDFMapView(url: myGeoPDFURL)
-///
-/// Reopens automatically when `url` changes.
-public struct GeoPDFMapView: UIViewControllerRepresentable {
-    public let url: URL
+/// SwiftUI wrapper around `GeoPDFMapViewController`. Reopens when `url` changes.
+struct GeoPDFMapView: UIViewControllerRepresentable {
+    let url: URL
+    let recorder: TrackRecorder
 
-    public init(url: URL) {
-        self.url = url
+    func makeUIViewController(context: Context) -> GeoPDFMapViewController {
+        let controller = GeoPDFMapViewController()
+        controller.recorder = recorder
+        return controller
     }
 
-    public func makeUIViewController(context: Context) -> GeoPDFMapViewController {
-        GeoPDFMapViewController()
-    }
-
-    public func updateUIViewController(_ controller: GeoPDFMapViewController, context: Context) {
+    func updateUIViewController(_ controller: GeoPDFMapViewController, context: Context) {
         controller.open(url: url)
     }
 }

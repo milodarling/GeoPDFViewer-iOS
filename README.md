@@ -27,7 +27,18 @@ GeoPDFViewer/
     DocumentPicker.swift            UIDocumentPicker wrapper (PDFs)
   UI/
     GeoPDFMapView.swift             SwiftUI wrapper (UIViewControllerRepresentable)
-    GeoPDFMapViewController.swift   PDFKit view + CoreLocation + dot overlay + banners
+    GeoPDFMapViewController.swift   PDFKit view + track/dot overlay + banners
+    QRScannerView.swift             AVFoundation QR scanner
+    TrackingHUD.swift               live stats panel + Start/Pause/Finish/Discard
+    StatFormatting.swift            shared locale-aware stat formatting
+    SessionsListView.swift          browse saved sessions
+    SessionDetailView.swift         saved route on a MapKit map + stats
+  Tracking/
+    TrackModels.swift               TrackPoint, TrackStats, TrackSessionMeta (Codable)
+    TrackStore.swift                crash-safe JSON-lines persistence (active session)
+    TrackRecorder.swift             CLLocationManager owner: path, stats, background, restore
+    SessionModels.swift             SessionSummary (Codable) for saved sessions
+    SessionLibrary.swift            saved-session store (Application Support/Sessions)
   GeoPDFKit/                        reusable, UI-free core
     MeasureGEO.swift                raw parsed /Measure(GEO) data (no interpretation)
     GeoPDFParser.swift              CGPDF traversal: page /VP -> /Measure -> GPTS/Bounds/GCS
@@ -82,6 +93,36 @@ Nothing in the parser, loader, or UI changes. Concrete next steps:
   interpolation over `(pageFractions ↔ gpts)` without assuming axis alignment.
 - **Datum handling** — GPS is WGS84; older maps may be NAD27/NAD83 (tens of
   metres off). Read the datum from `/GCS` WKT and shift if needed.
+
+## Live tracking
+
+On a georeferenced map, the HUD's **Start** records your session:
+
+- **Path** — drawn live on the PDF as a blue polyline overlay, glued to the map
+  through pan/zoom. Coordinates are stored as lat/lon, so the same track renders
+  on any map that covers the area.
+- **Stats** — elapsed time (pause-aware), distance, elevation gain (with a 1 m
+  noise deadband), and pace (min/km or /mi by locale).
+- **Persistence** — each fix is appended to a JSON-lines file plus a metadata
+  file in Application Support (`TrackStore`). A crash or termination loses at
+  most the last unwritten fix; on next launch the session is restored, and if it
+  was recording it resumes.
+- **Background** — recording continues while backgrounded via
+  `allowsBackgroundLocationUpdates` + the `location` background mode (enabled
+  only while recording; the blue status indicator shows).
+- **Saved sessions** — **Finish** archives the session into
+  `Application Support/Sessions/<id>/` (a small `summary.json` + full
+  `points.jsonl`). The **Sessions** button (top-left) lists saved sessions;
+  tapping one shows its route on a MapKit map plus stats, so past tracks are
+  viewable without the original GeoPDF. Swipe to delete. **Discard** ends the
+  active session without saving.
+
+**Known limitation:** while the app is *fully terminated* (not just
+backgrounded), iOS records no new points until you reopen it — the saved
+path/stats stay intact and continue, but bridging the dead-time gap needs
+significant-location-change relaunch (`startMonitoringSignificantLocationChanges`),
+a deliberate follow-up. Elevation gain accuracy depends on GPS barometric
+altitude, which is noisy; the deadband trades small real gains for less drift.
 
 ## Build & run
 

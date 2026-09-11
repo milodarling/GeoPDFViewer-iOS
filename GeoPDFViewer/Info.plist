@@ -28,6 +28,10 @@
 	<string>Your location is shown as a marker on the open map.</string>
 	<key>NSCameraUsageDescription</key>
 	<string>The camera scans QR codes that link to GeoPDF maps.</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>location</string>
+	</array>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchScreen</key>

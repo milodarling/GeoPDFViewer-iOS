@@ -22,6 +22,15 @@
 		000000000000000000008014 /* DocumentsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000007014 /* DocumentsStore.swift */; };
 		000000000000000000008015 /* QRScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000007015 /* QRScannerView.swift */; };
 		000000000000000000008016 /* PDFDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000007016 /* PDFDownloader.swift */; };
+		000000000000000000008017 /* TrackModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000007017 /* TrackModels.swift */; };
+		000000000000000000008018 /* TrackStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000007018 /* TrackStore.swift */; };
+		000000000000000000008019 /* TrackRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000007019 /* TrackRecorder.swift */; };
+		000000000000000000008020 /* TrackingHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000007020 /* TrackingHUD.swift */; };
+		000000000000000000008021 /* SessionModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000007021 /* SessionModels.swift */; };
+		000000000000000000008022 /* SessionLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000007022 /* SessionLibrary.swift */; };
+		000000000000000000008023 /* StatFormatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000007023 /* StatFormatting.swift */; };
+		000000000000000000008024 /* SessionsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000007024 /* SessionsListView.swift */; };
+		000000000000000000008025 /* SessionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000007025 /* SessionDetailView.swift */; };
 		BB8B8F5D3054B44D0087344F /* Asset.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB8B8F5C3054B44D0087344F /* Asset.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +52,15 @@
 		000000000000000000007014 /* DocumentsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsStore.swift; sourceTree = "<group>"; };
 		000000000000000000007015 /* QRScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerView.swift; sourceTree = "<group>"; };
 		000000000000000000007016 /* PDFDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFDownloader.swift; sourceTree = "<group>"; };
+		000000000000000000007017 /* TrackModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackModels.swift; sourceTree = "<group>"; };
+		000000000000000000007018 /* TrackStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackStore.swift; sourceTree = "<group>"; };
+		000000000000000000007019 /* TrackRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackRecorder.swift; sourceTree = "<group>"; };
+		000000000000000000007020 /* TrackingHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingHUD.swift; sourceTree = "<group>"; };
+		000000000000000000007021 /* SessionModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionModels.swift; sourceTree = "<group>"; };
+		000000000000000000007022 /* SessionLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionLibrary.swift; sourceTree = "<group>"; };
+		000000000000000000007023 /* StatFormatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatFormatting.swift; sourceTree = "<group>"; };
+		000000000000000000007024 /* SessionsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionsListView.swift; sourceTree = "<group>"; };
+		000000000000000000007025 /* SessionDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDetailView.swift; sourceTree = "<group>"; };
 		BB8B8F5C3054B44D0087344F /* Asset.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Asset.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -79,6 +97,7 @@
 				000000000000000000002010 /* App */,
 				000000000000000000002011 /* UI */,
 				000000000000000000002012 /* GeoPDFKit */,
+				000000000000000000002014 /* Tracking */,
 				000000000000000000002013 /* Resources */,
 				000000000000000000007012 /* Info.plist */,
 			);
@@ -103,8 +122,24 @@
 				000000000000000000007004 /* GeoPDFMapViewController.swift */,
 				000000000000000000007005 /* GeoPDFMapView.swift */,
 				000000000000000000007015 /* QRScannerView.swift */,
+				000000000000000000007020 /* TrackingHUD.swift */,
+				000000000000000000007023 /* StatFormatting.swift */,
+				000000000000000000007024 /* SessionsListView.swift */,
+				000000000000000000007025 /* SessionDetailView.swift */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		000000000000000000002014 /* Tracking */ = {
+			isa = PBXGroup;
+			children = (
+				000000000000000000007017 /* TrackModels.swift */,
+				000000000000000000007018 /* TrackStore.swift */,
+				000000000000000000007019 /* TrackRecorder.swift */,
+				000000000000000000007021 /* SessionModels.swift */,
+				000000000000000000007022 /* SessionLibrary.swift */,
+			);
+			path = Tracking;
 			sourceTree = "<group>";
 		};
 		000000000000000000002012 /* GeoPDFKit */ = {
@@ -205,6 +240,15 @@
 				000000000000000000008014 /* DocumentsStore.swift in Sources */,
 				000000000000000000008015 /* QRScannerView.swift in Sources */,
 				000000000000000000008016 /* PDFDownloader.swift in Sources */,
+				000000000000000000008017 /* TrackModels.swift in Sources */,
+				000000000000000000008018 /* TrackStore.swift in Sources */,
+				000000000000000000008019 /* TrackRecorder.swift in Sources */,
+				000000000000000000008020 /* TrackingHUD.swift in Sources */,
+				000000000000000000008021 /* SessionModels.swift in Sources */,
+				000000000000000000008022 /* SessionLibrary.swift in Sources */,
+				000000000000000000008023 /* StatFormatting.swift in Sources */,
+				000000000000000000008024 /* SessionsListView.swift in Sources */,
+				000000000000000000008025 /* SessionDetailView.swift in Sources */,
 				000000000000000000008004 /* GeoPDFMapViewController.swift in Sources */,
 				000000000000000000008005 /* GeoPDFMapView.swift in Sources */,
 				000000000000000000008006 /* MeasureGEO.swift in Sources */,

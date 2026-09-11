@@ -2,22 +2,37 @@ import CoreLocation
 import PDFKit
 import UIKit
 
-/// Displays a GeoPDF and, when supported, tracks the user's location as a dot.
-/// Falls back to a plain PDF view (with an explanatory banner) for unsupported
-/// maps, and shows an error banner for files that can't be opened at all.
+/// Displays a GeoPDF, draws the recorded track as an overlay, and shows the
+/// user's current location as a dot. Location and recording are owned by the
+/// injected `TrackRecorder`; this controller only renders its state. Unsupported
+/// maps still display (with a banner) but get no dot/track.
 public final class GeoPDFMapViewController: UIViewController {
 
+    /// Injected by `GeoPDFMapView`. The controller reads its `latest` and
+    /// `points` each frame; it never drives location itself.
+    var recorder: TrackRecorder?
+
     private let pdfView = PDFView()
+    private let overlayView = UIView()          // holds the track layer + dot, above the PDF
+    private let trackLayer = CAShapeLayer()
     private let dotView = LocationDotView()
     private let bannerLabel = PaddedLabel()
-    private let locationManager = CLLocationManager()
     private let loader = GeoPDFLoader()
 
     private var georeferencer: Georeferencer?
     private var page: PDFPage?
     private var displayLink: CADisplayLink?
-    private var lastCoordinate: CLLocationCoordinate2D?
     private var currentURL: URL?
+
+    /// Cheap signature of "does the track need redrawing": point count + the
+    /// PDF's pan/zoom state. Rebuilds the path only when one of these changes.
+    private struct TrackSignature: Equatable {
+        var count: Int
+        var originX: CGFloat
+        var originY: CGFloat
+        var scale: CGFloat
+    }
+    private var lastSignature: TrackSignature?
 
     // MARK: - Lifecycle
 
@@ -27,8 +42,11 @@ public final class GeoPDFMapViewController: UIViewController {
         setupPDFView()
         setupOverlay()
         setupBanner()
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+    }
+
+    public override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        trackLayer.frame = overlayView.bounds
     }
 
     /// Open a GeoPDF. Safe to call repeatedly with the same URL (no-op).
@@ -41,7 +59,7 @@ public final class GeoPDFMapViewController: UIViewController {
             pdfView.document = nil
             georeferencer = nil
             page = nil
-            stopTracking()
+            stopRendering()
             showBanner(message, style: .error)
 
         case .unsupported(let document, let reason):
@@ -49,7 +67,7 @@ public final class GeoPDFMapViewController: UIViewController {
             pdfView.autoScales = true
             georeferencer = nil
             page = nil
-            stopTracking()
+            stopRendering()
             showBanner(reason.message, style: .warning)
 
         case .georeferenced(let document, let geo, let warnings):
@@ -58,52 +76,70 @@ public final class GeoPDFMapViewController: UIViewController {
             georeferencer = geo
             page = document.page(at: 0)
             warnings.isEmpty ? hideBanner() : showBanner(warnings.joined(separator: "\n"), style: .info)
-            startTracking()
+            startRendering()
         }
     }
 
-    // MARK: - Location tracking
-
-    private func startTracking() {
-        switch locationManager.authorizationStatus {
-        case .notDetermined:
-            locationManager.requestWhenInUseAuthorization()
-        case .authorizedWhenInUse, .authorizedAlways:
-            locationManager.startUpdatingLocation()
-        default:
-            showBanner("Enable location access in Settings to see your position on the map.", style: .warning)
-        }
-        startDisplayLink()
-    }
-
-    private func stopTracking() {
-        locationManager.stopUpdatingLocation()
-        stopDisplayLink()
-        dotView.isHidden = true
-    }
+    // MARK: - Rendering loop
 
     // PDFView exposes no single reliable "viewport changed" callback, so a
-    // display link keeps the dot glued to the map through scroll and zoom.
-    private func startDisplayLink() {
+    // display link keeps the dot and track glued to the map through scroll/zoom.
+    private func startRendering() {
         guard displayLink == nil else { return }
-        let link = CADisplayLink(target: self, selector: #selector(updateDotPosition))
+        let link = CADisplayLink(target: self, selector: #selector(tick))
         link.add(to: .main, forMode: .common)
         displayLink = link
     }
 
-    private func stopDisplayLink() {
+    private func stopRendering() {
         displayLink?.invalidate()
         displayLink = nil
+        dotView.isHidden = true
+        trackLayer.path = nil
+        lastSignature = nil
     }
 
-    @objc private func updateDotPosition() {
-        guard let geo = georeferencer, let page = page, let coordinate = lastCoordinate,
+    @objc private func tick() {
+        guard let geo = georeferencer, let page = page else {
+            dotView.isHidden = true
+            trackLayer.path = nil
+            return
+        }
+        updateTrack(geo: geo, page: page)
+        updateDot(geo: geo, page: page)
+    }
+
+    private func updateTrack(geo: Georeferencer, page: PDFPage) {
+        let points = recorder?.points ?? []
+        let origin = pdfView.convert(.zero, from: page)
+        let signature = TrackSignature(count: points.count, originX: origin.x,
+                                       originY: origin.y, scale: pdfView.scaleFactor)
+        guard signature != lastSignature else { return }
+        lastSignature = signature
+
+        guard points.count > 1 else { trackLayer.path = nil; return }
+        let path = UIBezierPath()
+        var started = false
+        for point in points {
+            guard let pagePoint = geo.pagePoint(for: point.coordinate) else { continue }
+            let viewPoint = overlayView.convert(pdfView.convert(pagePoint, from: page), from: pdfView)
+            if started {
+                path.addLine(to: viewPoint)
+            } else {
+                path.move(to: viewPoint)
+                started = true
+            }
+        }
+        trackLayer.path = path.cgPath
+    }
+
+    private func updateDot(geo: Georeferencer, page: PDFPage) {
+        guard let coordinate = recorder?.latest?.coordinate,
               geo.contains(coordinate), let pagePoint = geo.pagePoint(for: coordinate) else {
             dotView.isHidden = true
             return
         }
-        let pointInPDFView = pdfView.convert(pagePoint, from: page)
-        dotView.center = view.convert(pointInPDFView, from: pdfView)
+        dotView.center = overlayView.convert(pdfView.convert(pagePoint, from: page), from: pdfView)
         dotView.isHidden = false
     }
 
@@ -122,8 +158,27 @@ public final class GeoPDFMapViewController: UIViewController {
     }
 
     private func setupOverlay() {
+        overlayView.isUserInteractionEnabled = false
+        overlayView.backgroundColor = .clear
+        overlayView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(overlayView)
+        NSLayoutConstraint.activate([
+            overlayView.topAnchor.constraint(equalTo: view.topAnchor),
+            overlayView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            overlayView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            overlayView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+        ])
+
+        trackLayer.fillColor = UIColor.clear.cgColor
+        trackLayer.strokeColor = UIColor.systemBlue.cgColor
+        trackLayer.lineWidth = 4
+        trackLayer.lineJoin = .round
+        trackLayer.lineCap = .round
+        trackLayer.opacity = 0.9
+        overlayView.layer.addSublayer(trackLayer)
+
         dotView.isHidden = true
-        view.addSubview(dotView) // sits above the PDF, below the banner
+        overlayView.addSubview(dotView)
     }
 
     private func setupBanner() {
@@ -160,29 +215,6 @@ public final class GeoPDFMapViewController: UIViewController {
 
     private func hideBanner() {
         bannerLabel.isHidden = true
-    }
-}
-
-// MARK: - CLLocationManagerDelegate
-
-extension GeoPDFMapViewController: CLLocationManagerDelegate {
-    public func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        switch manager.authorizationStatus {
-        case .authorizedWhenInUse, .authorizedAlways:
-            manager.startUpdatingLocation()
-        case .denied, .restricted:
-            showBanner("Location access is off; your position won't be shown.", style: .warning)
-        default:
-            break
-        }
-    }
-
-    public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        lastCoordinate = locations.last?.coordinate
-    }
-
-    public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        // Transient failures are common outdoors; keep the last known position.
     }
 }
 

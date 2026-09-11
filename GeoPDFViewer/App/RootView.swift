@@ -35,7 +35,17 @@ struct RootView: View {
             .navigationDestination(for: URL.self) { url in
                 MapScreen(url: url)
             }
+            .navigationDestination(for: SessionSummary.self) { summary in
+                SessionDetailView(summary: summary)
+            }
             .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    NavigationLink {
+                        SessionsListView()
+                    } label: {
+                        Label("Sessions", systemImage: "clock.arrow.circlepath")
+                    }
+                }
                 ToolbarItemGroup(placement: .topBarTrailing) {
                     Button {
                         isScannerPresented = true
@@ -158,18 +168,23 @@ struct RootView: View {
     }
 }
 
-/// Full-screen map for one document.
+/// Full-screen map for one document, with the tracking HUD overlaid on top.
 struct MapScreen: View {
     let url: URL
+    @EnvironmentObject private var recorder: TrackRecorder
 
     var body: some View {
-        GeoPDFMapView(url: url)
+        GeoPDFMapView(url: url, recorder: recorder)
             .ignoresSafeArea(edges: .bottom)
+            .overlay(alignment: .top) { TrackingHUD(recorder: recorder) }
             .navigationTitle(url.deletingPathExtension().lastPathComponent)
             .navigationBarTitleDisplayMode(.inline)
+            .onAppear { recorder.startViewing() }
+            .onDisappear { recorder.stopViewing() }
     }
 }
 
 #Preview {
     RootView()
+        .environmentObject(TrackRecorder())
 }
