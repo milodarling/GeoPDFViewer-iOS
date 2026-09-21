@@ -1,5 +1,12 @@
 import SwiftUI
 
+/// Value-based navigation targets that aren't documents or sessions. Keeping
+/// all pushes value-based (no view-based `NavigationLink`) avoids the iOS 16
+/// double-push bug that reopened the sessions list on top of a tapped session.
+enum RootDestination: Hashable {
+    case sessions
+}
+
 /// Lists the bundled sample plus any GeoPDFs in the app's Documents folder
 /// (drop files there via the Files app), and opens the chosen one on a map.
 struct RootView: View {
@@ -38,11 +45,14 @@ struct RootView: View {
             .navigationDestination(for: SessionSummary.self) { summary in
                 SessionDetailView(summary: summary)
             }
+            .navigationDestination(for: RootDestination.self) { destination in
+                switch destination {
+                case .sessions: SessionsListView()
+                }
+            }
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
-                    NavigationLink {
-                        SessionsListView()
-                    } label: {
+                    NavigationLink(value: RootDestination.sessions) {
                         Label("Sessions", systemImage: "clock.arrow.circlepath")
                     }
                 }
