@@ -26,6 +26,10 @@ final class TrackRecorder: NSObject, ObservableObject {
     private var displayTimer: Timer?
     private var viewers = 0
 
+    /// Set on init so the Live Activity's pause/resume intent (which runs in
+    /// this process) can reach the app-scoped recorder via a notification.
+    static private(set) weak var shared: TrackRecorder?
+
     /// Fixes worse than this (meters) are ignored for path/stats.
     private let horizontalAccuracyLimit: CLLocationDistance = 50
     /// Minimum upward change (meters) counted toward elevation gain (noise deadband).
@@ -37,7 +41,20 @@ final class TrackRecorder: NSObject, ObservableObject {
         manager.desiredAccuracy = kCLLocationAccuracyBest
         manager.activityType = .fitness
         manager.pausesLocationUpdatesAutomatically = false
+        TrackRecorder.shared = self
+        NotificationCenter.default.addObserver(
+            forName: .toggleTrackRecording, object: nil, queue: .main) { [weak self] _ in
+            self?.toggle()
+        }
         restoreSession()
+    }
+
+    /// Toggle recording ⇄ paused (driven by the Live Activity button).
+    func toggle() {
+        switch state {
+        case .recording: pause()
+        case .paused, .idle: start()
+        }
     }
 
     // MARK: - Viewing (the location dot is shown whenever a map is on screen)
@@ -80,6 +97,7 @@ final class TrackRecorder: NSObject, ObservableObject {
         manager.startUpdatingLocation()
         startDisplayTimer()
         recomputeDuration()
+        beginOrUpdateLiveActivity()
     }
 
     func pause() {
@@ -94,6 +112,7 @@ final class TrackRecorder: NSObject, ObservableObject {
         stopDisplayTimer()
         if viewers == 0 { manager.stopUpdatingLocation() }
         recomputeDuration()
+        refreshLiveActivity()
     }
 
     /// End the current session and save it to the library, then clear the active
@@ -127,6 +146,30 @@ final class TrackRecorder: NSObject, ObservableObject {
         enableBackgroundUpdates(false)
         stopDisplayTimer()
         if viewers == 0 { manager.stopUpdatingLocation() }
+        endLiveActivity()
+    }
+
+    // MARK: - Live Activity
+
+    private func beginOrUpdateLiveActivity() {
+        guard #available(iOS 16.2, *) else { return }
+        LiveActivityController.shared.startOrUpdate(
+            distance: stats.distance, elevationGain: stats.elevationGain,
+            paceSecondsPerKilometer: stats.paceSecondsPerKilometer,
+            activeDuration: stats.duration, isRunning: state == .recording)
+    }
+
+    private func refreshLiveActivity() {
+        guard #available(iOS 16.2, *) else { return }
+        LiveActivityController.shared.update(
+            distance: stats.distance, elevationGain: stats.elevationGain,
+            paceSecondsPerKilometer: stats.paceSecondsPerKilometer,
+            activeDuration: stats.duration, isRunning: state == .recording)
+    }
+
+    private func endLiveActivity() {
+        guard #available(iOS 16.2, *) else { return }
+        LiveActivityController.shared.end()
     }
 
     // MARK: - Restore
@@ -145,6 +188,7 @@ final class TrackRecorder: NSObject, ObservableObject {
         } else {
             state = .paused
         }
+        beginOrUpdateLiveActivity()
     }
 
     /// Recompute distance/elevation from stored points (duration comes from meta).
@@ -246,6 +290,7 @@ extension TrackRecorder: CLLocationManagerDelegate {
             store.appendPoint(point)
         }
         recomputeDuration()
+        refreshLiveActivity()
     }
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

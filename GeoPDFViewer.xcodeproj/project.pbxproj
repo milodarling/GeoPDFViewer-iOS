@@ -33,6 +33,15 @@
 		000000000000000000008025 /* SessionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000007025 /* SessionDetailView.swift */; };
 		BB8B8F5D3054B44D0087344F /* Asset.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB8B8F5C3054B44D0087344F /* Asset.xcassets */; };
 		0000000000000000000A8001 /* MapOnlyScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0000000000000000000A7001 /* MapOnlyScreen.swift */; };
+		0000000000000000000A8002 /* TrackActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0000000000000000000A7002 /* TrackActivityAttributes.swift */; };
+		0000000000000000000A8003 /* ToggleTrackIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0000000000000000000A7003 /* ToggleTrackIntent.swift */; };
+		0000000000000000000A8004 /* LiveActivityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0000000000000000000A7004 /* LiveActivityController.swift */; };
+		0000000000000000000A8005 /* TrackWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0000000000000000000A7005 /* TrackWidgetBundle.swift */; };
+		0000000000000000000A8006 /* TrackLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0000000000000000000A7006 /* TrackLiveActivity.swift */; };
+		0000000000000000000A8007 /* TrackActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0000000000000000000A7002 /* TrackActivityAttributes.swift */; };
+		0000000000000000000A8008 /* ToggleTrackIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0000000000000000000A7003 /* ToggleTrackIntent.swift */; };
+		0000000000000000000A8009 /* StatFormatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000007023 /* StatFormatting.swift */; };
+		0000000000000000000A8010 /* TrackWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 0000000000000000000A7008 /* TrackWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +73,13 @@
 		000000000000000000007025 /* SessionDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDetailView.swift; sourceTree = "<group>"; };
 		BB8B8F5C3054B44D0087344F /* Asset.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Asset.xcassets; sourceTree = "<group>"; };
 		0000000000000000000A7001 /* MapOnlyScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapOnlyScreen.swift; sourceTree = "<group>"; };
+		0000000000000000000A7002 /* TrackActivityAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackActivityAttributes.swift; sourceTree = "<group>"; };
+		0000000000000000000A7003 /* ToggleTrackIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleTrackIntent.swift; sourceTree = "<group>"; };
+		0000000000000000000A7004 /* LiveActivityController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivityController.swift; sourceTree = "<group>"; };
+		0000000000000000000A7005 /* TrackWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackWidgetBundle.swift; sourceTree = "<group>"; };
+		0000000000000000000A7006 /* TrackLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackLiveActivity.swift; sourceTree = "<group>"; };
+		0000000000000000000A7007 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0000000000000000000A7008 /* TrackWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TrackWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,13 +90,35 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0000000000000000000A5002 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		0000000000000000000A5004 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				0000000000000000000A8010 /* TrackWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXGroup section */
 		000000000000000000002001 = {
 			isa = PBXGroup;
 			children = (
 				000000000000000000002003 /* GeoPDFViewer */,
+				0000000000000000000A2001 /* TrackWidget */,
 				000000000000000000002002 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -89,8 +127,19 @@
 			isa = PBXGroup;
 			children = (
 				000000000000000000004001 /* GeoPDFViewer.app */,
+				0000000000000000000A7008 /* TrackWidgetExtension.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		0000000000000000000A2001 /* TrackWidget */ = {
+			isa = PBXGroup;
+			children = (
+				0000000000000000000A7005 /* TrackWidgetBundle.swift */,
+				0000000000000000000A7006 /* TrackLiveActivity.swift */,
+				0000000000000000000A7007 /* Info.plist */,
+			);
+			path = TrackWidget;
 			sourceTree = "<group>";
 		};
 		000000000000000000002003 /* GeoPDFViewer */ = {
@@ -141,6 +190,9 @@
 				000000000000000000007019 /* TrackRecorder.swift */,
 				000000000000000000007021 /* SessionModels.swift */,
 				000000000000000000007022 /* SessionLibrary.swift */,
+				0000000000000000000A7002 /* TrackActivityAttributes.swift */,
+				0000000000000000000A7003 /* ToggleTrackIntent.swift */,
+				0000000000000000000A7004 /* LiveActivityController.swift */,
 			);
 			path = Tracking;
 			sourceTree = "<group>";
@@ -177,15 +229,34 @@
 				000000000000000000005001 /* Sources */,
 				000000000000000000005002 /* Frameworks */,
 				000000000000000000005003 /* Resources */,
+				0000000000000000000A5004 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				0000000000000000000A9002 /* PBXTargetDependency */,
 			);
 			name = GeoPDFViewer;
 			productName = GeoPDFViewer;
 			productReference = 000000000000000000004001 /* GeoPDFViewer.app */;
 			productType = "com.apple.product-type.application";
+		};
+		0000000000000000000A3001 /* TrackWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0000000000000000000A6001 /* Build configuration list for PBXNativeTarget "TrackWidgetExtension" */;
+			buildPhases = (
+				0000000000000000000A5001 /* Sources */,
+				0000000000000000000A5002 /* Frameworks */,
+				0000000000000000000A5003 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TrackWidgetExtension;
+			productName = TrackWidgetExtension;
+			productReference = 0000000000000000000A7008 /* TrackWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -198,6 +269,9 @@
 				LastUpgradeCheck = 2660;
 				TargetAttributes = {
 					000000000000000000003001 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+					0000000000000000000A3001 = {
 						CreatedOnToolsVersion = 15.0;
 					};
 				};
@@ -216,6 +290,7 @@
 			projectRoot = "";
 			targets = (
 				000000000000000000003001 /* GeoPDFViewer */,
+				0000000000000000000A3001 /* TrackWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -227,6 +302,13 @@
 			files = (
 				BB8B8F5D3054B44D0087344F /* Asset.xcassets in Resources */,
 				000000000000000000008013 /* El Cajon Mountain Trail Map.pdf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0000000000000000000A5003 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,10 +343,43 @@
 				000000000000000000008010 /* GeoPDFParser.swift in Sources */,
 				000000000000000000008011 /* GeoPDFLoader.swift in Sources */,
 				0000000000000000000A8001 /* MapOnlyScreen.swift in Sources */,
+				0000000000000000000A8002 /* TrackActivityAttributes.swift in Sources */,
+				0000000000000000000A8003 /* ToggleTrackIntent.swift in Sources */,
+				0000000000000000000A8004 /* LiveActivityController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0000000000000000000A5001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0000000000000000000A8005 /* TrackWidgetBundle.swift in Sources */,
+				0000000000000000000A8006 /* TrackLiveActivity.swift in Sources */,
+				0000000000000000000A8007 /* TrackActivityAttributes.swift in Sources */,
+				0000000000000000000A8008 /* ToggleTrackIntent.swift in Sources */,
+				0000000000000000000A8009 /* StatFormatting.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXContainerItemProxy section */
+		0000000000000000000A9001 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 000000000000000000001001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0000000000000000000A3001 /* TrackWidgetExtension */;
+			remoteInfo = TrackWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXTargetDependency section */
+		0000000000000000000A9002 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0000000000000000000A3001 /* TrackWidgetExtension */;
+			targetProxy = 0000000000000000000A9001 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		000000000000000000006101 /* Debug */ = {
@@ -433,6 +548,56 @@
 			};
 			name = Release;
 		};
+		0000000000000000000A6101 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = W46U8J9628;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = TrackWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.milodarling.GeoPDFViewer.TrackWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		0000000000000000000A6102 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = W46U8J9628;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = TrackWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.milodarling.GeoPDFViewer.TrackWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -450,6 +615,15 @@
 			buildConfigurations = (
 				000000000000000000006103 /* Debug */,
 				000000000000000000006104 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0000000000000000000A6001 /* Build configuration list for PBXNativeTarget "TrackWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0000000000000000000A6101 /* Debug */,
+				0000000000000000000A6102 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
