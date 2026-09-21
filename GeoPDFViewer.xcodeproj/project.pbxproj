@@ -32,6 +32,7 @@
 		000000000000000000008024 /* SessionsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000007024 /* SessionsListView.swift */; };
 		000000000000000000008025 /* SessionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000007025 /* SessionDetailView.swift */; };
 		BB8B8F5D3054B44D0087344F /* Asset.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB8B8F5C3054B44D0087344F /* Asset.xcassets */; };
+		0000000000000000000A8001 /* MapOnlyScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0000000000000000000A7001 /* MapOnlyScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		000000000000000000007024 /* SessionsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionsListView.swift; sourceTree = "<group>"; };
 		000000000000000000007025 /* SessionDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDetailView.swift; sourceTree = "<group>"; };
 		BB8B8F5C3054B44D0087344F /* Asset.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Asset.xcassets; sourceTree = "<group>"; };
+		0000000000000000000A7001 /* MapOnlyScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapOnlyScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +128,7 @@
 				000000000000000000007023 /* StatFormatting.swift */,
 				000000000000000000007024 /* SessionsListView.swift */,
 				000000000000000000007025 /* SessionDetailView.swift */,
+				0000000000000000000A7001 /* MapOnlyScreen.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -257,6 +260,7 @@
 				000000000000000000008009 /* SimpleAxisAlignedGeoreferencer.swift in Sources */,
 				000000000000000000008010 /* GeoPDFParser.swift in Sources */,
 				000000000000000000008011 /* GeoPDFLoader.swift in Sources */,
+				0000000000000000000A8001 /* MapOnlyScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

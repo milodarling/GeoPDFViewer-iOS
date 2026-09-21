@@ -5,6 +5,7 @@ import SwiftUI
 /// double-push bug that reopened the sessions list on top of a tapped session.
 enum RootDestination: Hashable {
     case sessions
+    case mapOnly
 }
 
 /// Lists the bundled sample plus any GeoPDFs in the app's Documents folder
@@ -19,6 +20,12 @@ struct RootView: View {
     var body: some View {
         NavigationStack {
             List {
+                Section("Track") {
+                    NavigationLink(value: RootDestination.mapOnly) {
+                        Label("Start with Apple Maps", systemImage: "location.circle")
+                    }
+                }
+
                 if let sample = Self.sampleURL {
                     Section("Sample") {
                         row(for: sample, deletable: false)
@@ -48,6 +55,7 @@ struct RootView: View {
             .navigationDestination(for: RootDestination.self) { destination in
                 switch destination {
                 case .sessions: SessionsListView()
+                case .mapOnly: MapOnlyScreen()
                 }
             }
             .toolbar {
